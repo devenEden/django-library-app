@@ -17,7 +17,7 @@ This system is library catalog that allows students borrow and return books that
 ## Getting Started
 
 ### Installation for development on a local Machine
-To run this software please ensure that you have [python](https://www.python.org/) installed.
+To run this software please ensure that you have [python](https://www.python.org/) and [django](https://docs.djangoproject.com/) installed.
 
 - Create a directory called library_catalog on your machine.
 - Clone the repository from [gitlab](https://gitlab.com/) with the commad below
