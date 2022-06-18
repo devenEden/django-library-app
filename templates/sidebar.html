@@ -1,0 +1,23 @@
+{% load static %}
+
+<nav class="sidebar">
+    <div class="sidebar-link-container sidebar-link-books">
+        <a class="sidebar-link">
+            <img class="sidebar-image" alt="books" src="{% static 'images/books.png' %}" />
+        </a>
+        <span class="sidebar-tooltip-books tooltip">Books</span>
+    </div>
+    <div class="sidebar-link-container sidebar-link-fines">
+        <a class="sidebar-link">
+            <img class="sidebar-image" alt="fines" src="{% static 'images/debit-card.png' %}" />
+        </a>
+        <span class="tooltip sidebar-tooltip-fines">Fines</span>
+    </div>
+
+    <div class="sidebar-link-container sidebar-link-logout">
+        <a class="sidebar-link">
+            <img class="sidebar-image" alt="fines" src="{% static 'images/logout.png' %}" />
+        </a>
+        <span class="tooltip sidebar-tooltip-logout">Logout</span>
+    </div>
+</nav>

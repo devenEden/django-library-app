@@ -1,0 +1,179 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f6f6f6;
+}
+
+a,input,button {
+    text-decoration: none;
+    font-family: 'Poppins';
+}
+
+/* NAVBAR */
+.navbar {
+    height: 13vh;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 98%;
+}
+
+.nav-logo-search {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: block;
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand span {
+    margin: 0 10px;
+}
+
+.navbar-image {
+    height: 40px;
+    width: 40px;
+}
+
+.nav-search-logo {
+   background-color: #f4f4f4;
+}
+
+.nav-search {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-search-logo {
+    margin: 0
+}
+
+.nav-search-input {
+    border: 0;
+    background-color: #f4f4f4;
+    height: 30px;
+    width: 80%;
+    margin: 0;
+    padding: 5px;
+    outline: none;
+}
+
+.nav-search-input::placeholder {
+    color: #d7d7d7;
+    font-family: 'Poppins';
+}
+
+.nav-search-button {
+    background-color: #1890ff;
+    color: #ffffff;
+    border: 0;
+    border-radius: 0;
+    transition: .3s ease-in;
+    font-size: 11px;
+}
+.nav-search-button:hover {
+    background-color: #ffffff;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    cursor: pointer;
+}
+.nav-user-profile {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.nav-user-profile span {
+    margin: 0 20px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* side bar */
+
+.sidebar {
+    width: 60px;
+    position: absolute;
+    top: 13.5vh;
+    height: 86.5vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-link-container {
+    margin: 10px 0;
+    transition: .3s ease-in;
+    cursor: pointer;
+}
+
+.tooltip {
+    opacity:  0;
+    width: 80px;
+    color: #1890ff;
+    padding: 2px 0;
+}
+
+.sidebar-tooltip-books {  
+    /* Position the tooltip */
+    position: absolute;
+    top: 10px;
+    left: 65px;
+    z-index: 1;
+}
+
+.sidebar-tooltip-fines {  
+    /* Position the tooltip */
+    position: absolute;
+    top: 50px;
+    left: 65px;
+    z-index: 1;
+}
+
+.sidebar-tooltip-logout {  
+    /* Position the tooltip */
+    position: absolute;
+    top: 100px;
+    left: 65px;
+    z-index: 1;
+}
+
+.sidebar-link-books:hover .sidebar-tooltip-books { 
+    opacity: 1;
+}
+
+.sidebar-link-fines:hover .sidebar-tooltip-fines { 
+    opacity: 1;
+}
+
+.sidebar-link-logout:hover .sidebar-tooltip-logout { 
+    opacity: 1;
+}
+
+.sidebar-image {
+    height: 25px;
+    width: 25px;
+}
+
