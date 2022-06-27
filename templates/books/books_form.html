@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Add A New Book</h3>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="input-containter">
+                <label class="input-label" for="books-title">Title: </label>
+                <input class="input" id="books-title" name="title" type="text" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="books-author">Author: </label>
+                <input class="input" id="books-author" name="author" type="text" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="books-description">Description: </label>
+                <textarea class="input" id="books-description" name="description" text"></textarea>
+            </div>
+            <button>
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
