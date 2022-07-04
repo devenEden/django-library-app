@@ -27,3 +27,5 @@ def signup(request):
         "form" : form
     }
     return render(request, "signup.html", context)
+
+    
