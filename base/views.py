@@ -18,8 +18,8 @@ def signup(request):
                 if new_user is not None:
                     login(request, new_user)
                     return redirect("home")
-    else:
-      pass
+    
+    
     
     form = SignUpForm()
 

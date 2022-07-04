@@ -1,4 +1,3 @@
-
 *{
     margin: 0;
     padding: 0;
@@ -22,6 +21,8 @@ html{
 .container{
     width: 90%;
     margin: auto;
+    min-width: 50%;
+    max-width: 80%;
 }
 
 .center{
@@ -71,8 +72,8 @@ html{
 }
 
 img{
-    max-width: 50px;
-    max-height: 50px;
+    max-width: auto;
+    max-height: auto;
 }
 
 /*####################
@@ -220,7 +221,7 @@ SIGNUP
 }
 
 .error:hover{
-    background-color: #F0C419;
+    background-color: gray;
 
 }
 
