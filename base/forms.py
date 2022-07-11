@@ -46,6 +46,25 @@ class SignUpForm(UserCreationForm):
             'maxlength' : '22',
             'minlength' : '8'
         })
+    
+
+    # class LoginForm():
+    #     def __init__(self, *args, **kwargs):
+    #         super().__init__(*args, **kwargs)
+    #         self.fields["username"].widget.attrs.update({
+    #         'name' : "username",
+    #         'id' : "username",
+    #         'type' : "text",
+    #         'class' : "form-input",
+    #         'placeholder' : "Peter Wakholi"
+    #          })
+
+    #     self.fields["password"].widget.attrs.update({
+    #         'type' :"password",
+    #         'class': "form-input",
+    #         'placeholder' : "Password"
+    #     })
+
 
     class Meta:
         model = User

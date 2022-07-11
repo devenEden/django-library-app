@@ -33,10 +33,10 @@
                 </button>
             </div>
             <div class="text-center line form-divider">or</div>
-            <form action="get" class="login-form spacer">
+            <form action="POST" class="login-form spacer">
                 {% csrf_token %}
                 <div class="input-group">
-                    {{form.email}}
+                    {{form.username}}
                     <img class="icon input-icon" src="{% static 'images/envelope.svg' %}" alt="">
                     <!--<input type="email" class="form-input" placeholder="peterwakholi.1@mail.com">-->
                 </div>
