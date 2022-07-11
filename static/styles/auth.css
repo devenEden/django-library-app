@@ -1,0 +1,116 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+ 
+a,input,button {
+    text-decoration: none;
+    font-family: 'Poppins';
+}
+/* general */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.alert {
+    width: 90%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgba(23, 149, 227, 0.1);
+}
+ 
+.alert-error {
+    background-color: rgba(241, 28, 8, 0.1);
+}
+ 
+/* login form*/
+.login-navbar {
+    display: flex;
+    flex-direction: column;
+}
+.login-navbar img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+ 
+.form-text {
+    margin: 20px 20px;
+    font-size: 10px;
+}
+.books-form {
+    width: 50%;
+}
+.form-container {
+   padding: 20px;
+   background-color: #fff;
+   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
+ 
+.input-containter {
+    width: 100%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+ 
+.input-containter label {
+    width: 100%;
+}
+.input-containter input {
+    width: 90%;
+    height: 25px;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0);
+    font-size: 20px;
+    outline: 0;
+    transition: .3s ease-in;
+}
+ 
+.input-containter textarea {
+    width: 90%;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0);
+    font-size: 20px;
+    outline: 0;  
+}
+ 
+.input-containter input:hover,.input-containter textarea:hover {
+    border-bottom: 1px solid #1890ff;
+}
+ 
+.books-form-header {
+    margin-left: 20px;
+}
+ 
+.form-container button {
+    background-color: #1890ff;
+    color: #ffffff;
+    border: 0;
+    border-radius: 0;
+    transition: .3s ease-in;
+    font-size: 11px;
+    height: 30px;
+    width: 20%;
+    margin-left: 20px;
+}
+.form-container button:hover {
+    background-color: #ffffff;
+    border: 1px solid #1890ff;
+    color: #1890ff;
+    cursor: pointer;
+}
+ 
+@media screen and (max-width: 800px) {
+    .books-form {
+        width: 90%;
+    }
+}
+ 
+ 
+

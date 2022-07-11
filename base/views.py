@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
 from .forms import BookForm
 from .models import Book
 
@@ -32,3 +32,33 @@ def createBook(request):
             form.save()
             return redirect('home')
     return render(request, 'books/books_form.html')
+
+# login views
+
+
+def loginPage(request):
+    context = {
+        'username': '',
+        'password': ''
+    }
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        context['username'] = username
+        context['password'] = password
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'Invalid Credentials')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Wrong credentials')
+
+    return render(request, 'auth/login.html', context)

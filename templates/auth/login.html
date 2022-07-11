@@ -1,0 +1,58 @@
+<html lang="en">
+{% load static %}
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/auth.css' %}">
+ 
+</head>
+ 
+<body>
+    <div class="main-container">
+        <div class="center">
+            <div class="login-navbar center">
+                <img class="navbar-image" src="{% static 'images/digital-library.png' %}" alt="">
+                <h1>Library System</h1>
+            </div>
+        </div>
+        <div class="center">
+            <div class="form-container books-form">
+                <h3 class="books-form-header">Login</h3>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="alert alert-error">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <p class="form-text">Don't have an account ? <a href="/register">Sign Up</a></p>
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="input-containter">
+                        <label class="input-label" for="books-title">Username: </label>
+                        <input value="{{ username }}" class="input" id="books-title" name="username" type="text" />
+                    </div>
+                    <div class="input-containter">
+                        <label class="input-label" for="books-author">Password: </label>
+                        <input value="{{ password }}" class="input" id="books-author" name="password" type="password" />
+                    </div>
+                    <a class="form-text" href="#">Forgot Password </a>
+                    <br> <br>
+                    <button>
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+ 
+</html>
+ 
+
