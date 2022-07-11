@@ -3,11 +3,33 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
-from .forms import BookForm
+from .forms import BookForm, SignUpForm, UserCreationForm
 from .models import Book
-
+from django.shortcuts import render, redirect 
 
 # Create your views here.
+# SIGNUP
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password1")
+            form.save()
+            new_user = authenticate(username = username, password = password)
+            if new_user is not None:
+               login(request, new_user)
+               return redirect("home")
+        
+        
+    form = SignUpForm()
+
+    context = {
+        "form" : form
+    }
+    return render(request, "auth/signup.html", context)
+
+
 # login views
 
 def logoutUser(request):
