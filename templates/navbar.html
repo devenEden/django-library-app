@@ -1,0 +1,18 @@
+{% load static %}
+
+<nav class="navbar">
+    <div class="nav-logo-search">
+        <a href="" class="navbar-brand">
+            <img class="navbar-image" src="{% static 'images/digital-library.png' %}" alt="">
+            <span>Library System</span>
+        </a>
+        <div class="nav-search">
+            <input class="nav-search-input" type="text" placeholder="Search for books">
+            <button class="nav-search-button" type="submit">Search</button>
+        </div>
+    </div>
+    <div class="nav-user-profile">
+        <span>{{ request.user }}</span>
+        <img class="navbar-image" src="{% static 'images/user.png' %}" alt="">
+    </div>
+</nav>
