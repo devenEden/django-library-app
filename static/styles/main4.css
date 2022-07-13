@@ -37,6 +37,50 @@ tbody tr:nth-child(even) {
     background-color: #f8f8f8;
 }
 
+.table-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-button {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #1890ff;
+    background-color: #fff;;
+    color: #1890ff;
+    width: 30%;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+.edit-button:hover {
+      background-color: #1890ff;
+      color: #fff;
+  } 
+.delete-button {
+    display: block;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #f71004;
+    background-color: #fff;;
+    color: #f71004;
+    width: 30%;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .delete-button:hover {
+      background-color: #f71004;
+      color: #fff;
+  } 
+
 /* NAVBAR */
 .navbar {
     height: 13vh;
@@ -167,7 +211,7 @@ tbody tr:nth-child(even) {
 .sidebar-tooltip-books {  
     /* Position the tooltip */
     position: absolute;
-    top: 10px;
+    top: 50px;
     left: 65px;
     z-index: 1;
 }
@@ -175,17 +219,25 @@ tbody tr:nth-child(even) {
 .sidebar-tooltip-fines {  
     /* Position the tooltip */
     position: absolute;
-    top: 50px;
     left: 65px;
+    top: 100px;
     z-index: 1;
 }
 
 .sidebar-tooltip-logout {  
     /* Position the tooltip */
     position: absolute;
-    top: 100px;
     left: 65px;
     z-index: 1;
+    top: 150px;
+}
+
+.sidebar-tooltip-home {  
+    /* Position the tooltip */
+    position: absolute;
+    left: 65px;
+    z-index: 1;
+    top: 10px;
 }
 
 .sidebar-link-books:hover .sidebar-tooltip-books { 
@@ -197,6 +249,10 @@ tbody tr:nth-child(even) {
 }
 
 .sidebar-link-logout:hover .sidebar-tooltip-logout { 
+    opacity: 1;
+}
+
+.sidebar-link-home:hover .sidebar-tooltip-home { 
     opacity: 1;
 }
 
@@ -273,7 +329,15 @@ tbody tr:nth-child(even) {
 
 
 /* books */
-
+.delete-button-container {
+    display: flex;
+    flex-direction: row;
+}
+.delete-form-container {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
 .books-form {
     width: 50%;
 }
