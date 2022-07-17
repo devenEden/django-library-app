@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
 from .forms import BookForm, SignUpForm, UserCreationForm
 from .models import Book
 from django.shortcuts import render, redirect 
@@ -84,3 +84,4 @@ def loginPage(request):
             messages.error(request, 'Wrong credentials')
 
     return render(request, 'auth/login.html', context)
+
