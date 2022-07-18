@@ -5,10 +5,12 @@ from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from .forms import BookForm, SignUpForm, UserCreationForm
 from .models import Book
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect
 
 # Create your views here.
 # SIGNUP
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -16,16 +18,15 @@ def signup(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password1")
             form.save()
-            new_user = authenticate(username = username, password = password)
+            new_user = authenticate(username=username, password=password)
             if new_user is not None:
-               login(request, new_user)
-               return redirect("home")
-        
-        
+                login(request, new_user)
+                return redirect("home")
+
     form = SignUpForm()
 
     context = {
-        "form" : form
+        "form": form
     }
     return render(request, "auth/signup.html", context)
 
@@ -55,6 +56,32 @@ def createBook(request):
             return redirect('home')
     return render(request, 'books/books_form.html')
 
+# edit book view
+
+
+def editBook(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {
+        'book': book
+    }
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'books/edit_book_form.html', context)
+
+
+def deleteBook(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {
+        'book': book
+    }
+    if request.method == 'POST':
+        book.delete()
+        return redirect('home')
+    return render(request, 'books/delete_book.html', context)
 # login views
 
 
