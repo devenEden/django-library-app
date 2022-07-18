@@ -3,12 +3,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
-from .forms import BookForm, SignUpForm, UserCreationForm
-from .models import Book
-from django.shortcuts import render, redirect 
+from .forms import BookForm, RoleForm, SignUpForm, UserCreationForm
+from .models import Book, Role
+from django.db.models import Q
 
 # Create your views here.
 # SIGNUP
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -16,16 +18,17 @@ def signup(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password1")
             form.save()
-            new_user = authenticate(username = username, password = password)
+            new_user = authenticate(username=username, password=password)
+            role = RoleForm({'user': new_user.id, 'role': 'Student'})
+            role.save()
             if new_user is not None:
-               login(request, new_user)
-               return redirect("home")
-        
-        
+                login(request, new_user)
+                return redirect("home")
+
     form = SignUpForm()
 
     context = {
-        "form" : form
+        "form": form
     }
     return render(request, "auth/signup.html", context)
 
@@ -39,9 +42,20 @@ def logoutUser(request):
 
 @login_required(login_url='/login')
 def home(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    total_students = Role.objects.filter(role='Student').count()
     total_books = Book.objects.count()
-    books = Book.objects.all()
-    context = {'books': books, 'total_books': total_books}
+    books = Book.objects.filter(Q(title__icontains=q) | Q(author__icontains=q))
+    user_role = Role.objects.get(user=request.user.id)
+
+    context = {
+        'books': books,
+        'total_books': total_books,
+        'total_students': total_students,
+        'user_role': user_role,
+        'q': q
+    }
     return render(request, 'dashboard.html', context)
 
 
@@ -55,6 +69,34 @@ def createBook(request):
             return redirect('home')
     return render(request, 'books/books_form.html')
 
+# edit book view
+
+
+@login_required(login_url='/login')
+def editBook(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {
+        'book': book
+    }
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'books/edit_book_form.html', context)
+
+
+@login_required(login_url='/login')
+def deleteBook(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {
+        'book': book
+    }
+    if request.method == 'POST':
+        book.delete()
+        return redirect('home')
+    return render(request, 'books/delete_book.html', context)
 # login views
 
 
@@ -84,4 +126,3 @@ def loginPage(request):
             messages.error(request, 'Wrong credentials')
 
     return render(request, 'auth/login.html', context)
-
