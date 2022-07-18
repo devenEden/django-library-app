@@ -50,6 +50,10 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.description }}</td>
+                <td class="table-actions">
+                    <a href="{% url 'edit_book' book.id %}" class="edit-button">edit</a>
+                    <a href="{% url 'delete_book' book.id %}" class="delete-button">delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
