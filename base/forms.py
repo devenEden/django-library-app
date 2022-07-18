@@ -1,20 +1,21 @@
-from django import forms 
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from dataclasses import field
 from django.forms import ModelForm
-from .models import Book
+from .models import Book, Role
+
 
 class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields["username"].widget.attrs.update({
         #     'required' : '',
-        #     'name' : 'username', 
+        #     'name' : 'username',
         #     'id' : 'username',
         #     'type' : 'text',
-        #     'class' : 'form-input',  
+        #     'class' : 'form-input',
         #     'placeholder' : 'Peter Wakholi',
         #     'maxlength' : '16',
         #     'minlength' : '6'
@@ -50,15 +51,19 @@ class SignUpForm(UserCreationForm):
         #     'maxlength' : '22',
         #     'minlength' : '8'
         # })
-    
 
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
 
 
-
 class BookForm(ModelForm):
     class Meta:
         model = Book
+        fields = '__all__'
+
+
+class RoleForm(ModelForm):
+    class Meta:
+        model = Role
         fields = '__all__'
