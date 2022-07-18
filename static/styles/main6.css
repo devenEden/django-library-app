@@ -38,6 +38,53 @@ tbody tr:nth-child(even) {
     background-color: #f8f8f8;
 }
 
+
+.table-actions {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.edit-button {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #1890ff;
+    background-color: #fff;;
+    color: #1890ff;
+    width: 30%;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+.edit-button:hover {
+      background-color: #1890ff;
+      color: #fff;
+  } 
+.delete-button {
+    display: block;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #f71004;
+    background-color: #fff;;
+    color: #f71004;
+    width: 30%;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .delete-button:hover {
+      background-color: #f71004;
+      color: #fff;
+  } 
+
+
 /* NAVBAR */
 .navbar {
     height: 13vh;
