@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h3>Welcome</h3>
+<h3>Dashboard</h3>
 <div class="dashboard-card-container">
     <div class="dashboard-card">
         <h1>{{ total_books }}</h1>
@@ -25,7 +25,6 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Description</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -34,10 +33,6 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.description }}</td>
-                <td class="table-actions">
-                    <a href="{% url 'edit_book' book.id %}" class="edit-button">Edit</a>
-                    <a href="{% url 'delete_book' book.id %}" class="delete-button">Delete</a>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
