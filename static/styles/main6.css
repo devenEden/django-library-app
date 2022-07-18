@@ -52,7 +52,6 @@ tbody tr:nth-child(even) {
     border: 1px solid #1890ff;
     background-color: #fff;;
     color: #1890ff;
-    width: 30%;
     text-align: center;
     transition: .3s ease-in;
     font-size: 12px;
@@ -213,7 +212,7 @@ tbody tr:nth-child(even) {
     padding: 2px 0;
 }
 
-.sidebar-tooltip-books {  
+.sidebar-tooltip-home {  
     /* Position the tooltip */
     position: absolute;
     top: 10px;
@@ -221,7 +220,7 @@ tbody tr:nth-child(even) {
     z-index: 1;
 }
 
-.sidebar-tooltip-fines {  
+.sidebar-tooltip-books {  
     /* Position the tooltip */
     position: absolute;
     top: 50px;
@@ -229,12 +228,24 @@ tbody tr:nth-child(even) {
     z-index: 1;
 }
 
-.sidebar-tooltip-logout {  
+.sidebar-tooltip-fines {  
     /* Position the tooltip */
     position: absolute;
     top: 100px;
     left: 65px;
     z-index: 1;
+}
+
+.sidebar-tooltip-logout {  
+    /* Position the tooltip */
+    position: absolute;
+    top: 150px;
+    left: 65px;
+    z-index: 1;
+}
+
+.sidebar-link-home:hover .sidebar-tooltip-home { 
+    opacity: 1;
 }
 
 .sidebar-link-books:hover .sidebar-tooltip-books { 
