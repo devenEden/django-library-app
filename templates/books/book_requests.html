@@ -1,7 +1,22 @@
 {% extends main.html %}
-
+{% load static %}
 {% block content %}
 
+<div class="student-books-container">
+    {% for book in books %}
+    <div class="book-card">
+        <div class="book-card-image-container">
+            <image class="book-card-image" src="{% static 'images/studentBook.png' %}" alt="">
+        </div>
+        <div class="book-card-text">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.description}}</p>
+            <p class="small-student-text">By {{ book.author }}</p>
+            <a class="edit-button" href="{% url 'book_requests' %}">Borrow</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 
 {% endblock %}
