@@ -1,6 +1,10 @@
 {% extends 'auth/index.html' %}
 {% load static %}
 
+<head>
+    <title>Login</title>
+</head>
+
  {% block content %}
         <div class="center">
             <div class="form-container books-form">
@@ -23,7 +27,7 @@
                         <label class="input-label" for="books-author">Password: </label>
                         <input value="{{ password }}" class="input" id="books-author" name="password" type="password" />
                     </div>
-                    <a class="form-text" href="#">Forgot Password </a>
+                    <a class="form-text" href="/reset_password">Forgot Password </a>
                     <br> <br>
                     <button>
                         Submit

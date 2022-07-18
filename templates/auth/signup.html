@@ -1,6 +1,8 @@
 {% extends 'auth/index.html' %}
 {% load static %}
-
+<head>
+    <title>Sign Up</title>
+</head>
  {% block content %}
         <div class="center">
             <div class="form-container books-form">
@@ -31,7 +33,7 @@
                         <label class="input-label" for="password2"> Confirm Password: </label>
                         <input value="{{ password2 }}" class="input" id="password2" name="password2" type="password" />
                     </div>
-                    <a class="form-text" href="#">Forgot Password </a>
+                    <a class="form-text" href="/forgotpassword">Forgot Password </a>
                     <br> <br>
                     <button>
                         Submit
