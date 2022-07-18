@@ -126,3 +126,7 @@ def loginPage(request):
             messages.error(request, 'Wrong credentials')
 
     return render(request, 'auth/login.html', context)
+
+#Book_requests
+def book_requests(request):
+    pass
