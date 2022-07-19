@@ -24,3 +24,6 @@ class Role(models.Model):
 
     def __str__(self):
         return self.role
+
+class Book_requests(models.Model):
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)

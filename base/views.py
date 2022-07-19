@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
 from .forms import BookForm, RoleForm, SignUpForm, UserCreationForm
-from .models import Book, Role
+from .models import Book, Role, Book_requests
 from django.db.models import Q
 
 # Create your views here.
@@ -128,5 +128,10 @@ def loginPage(request):
     return render(request, 'auth/login.html', context)
 
 #Book_requests
-def book_requests(request):
-   pass
+def book_requests(request, title):
+    try:
+        book = books.objects.get(pk = title)
+    except:
+        pass
+
+    return render(request, 'auth/book_requests.html', {'book' : book} )
