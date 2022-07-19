@@ -6,6 +6,8 @@ from django.contrib.auth import logout, login, authenticate, update_session_auth
 from .forms import BookForm, RoleForm, SignUpForm, UserCreationForm
 from .models import Book, Role, Book_requests
 from django.db.models import Q
+from django.template import loader
+from django.http import HttpResponse
 
 # Create your views here.
 # SIGNUP
@@ -127,11 +129,22 @@ def loginPage(request):
 
     return render(request, 'auth/login.html', context)
 
+#Book
+def books(request):
+    my_book = Book.objects.all()
+    template = loader.get_template('base/dashboard.html')
+
+    context= {
+        'my_book' : my_book, 
+    }
+
+    return HttpResponse(template.render(context, request))
+
 #Book_requests
-def book_requests(request, title):
+def book_requests(request, book_id):
     try:
-        book = books.objects.get(pk = title)
+        book = books.objects.get(pk = book_id)
     except:
         pass
 
-    return render(request, 'auth/book_requests.html', {'book' : book} )
+    return render(request, 'base/book_requests.html', {'book' : book} )
