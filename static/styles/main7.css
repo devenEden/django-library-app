@@ -57,6 +57,7 @@ tbody tr:nth-child(even) {
     font-size: 12px;
     display: flex;
     align-items: center;
+    width: 30%;
   }
   
 .edit-button:hover {
@@ -364,6 +365,7 @@ tbody tr:nth-child(even) {
 }
 .book-card-text {
     margin-left: 10px;
+    width: 80%;
 }
 
 /* books */
