@@ -3,6 +3,10 @@
 {% block content %}
 
 <h3>Welcome {{ request.user }}</h3>
+<form method="GET" action="" class="nav-search nav-search-mobile">
+    <input value="{{ q }}" name="q" class="nav-search-input" type="text" placeholder="Search for books">
+    <button class="nav-search-button" type="submit">Search</button>
+</form>
 {% if user_role.role == 'Student' %}
 <div class="student-books-container">
     {% for book in books %}
@@ -40,17 +44,27 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Author</th>
-                <th>Description</th>
+                <th class="table-responsive">Author</th>
+                <th class="table-responsive">Description</th>
             </tr>
         </thead>
         <tbody>
             {% for book in books %}
             <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.description }}</td>
-                <td class="table-actions">
+                <td>
+                    {{ book.title }}
+                    <div class="table-show-mobile">
+                        Author: {{ book.author }} <br>
+                        Description: {{ book.description }} <br>
+                        <div class="table-actions">
+                            <a href="{% url 'edit_book' book.id %}" class="edit-button">edit</a>
+                            <a href="{% url 'delete_book' book.id %}" class="delete-button">delete</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-responsive">{{ book.author }}</td>
+                <td class="table-responsive">{{ book.description }}</td>
+                <td class="table-actions table-responsive">
                     <a href="{% url 'edit_book' book.id %}" class="edit-button">edit</a>
                     <a href="{% url 'delete_book' book.id %}" class="delete-button">delete</a>
                 </td>
