@@ -38,6 +38,10 @@ tbody tr:nth-child(even) {
     background-color: #f8f8f8;
 }
 
+.table-show-mobile {
+    display: none;
+}
+
 
 .table-actions {
     display: flex;
@@ -57,6 +61,7 @@ tbody tr:nth-child(even) {
     font-size: 12px;
     display: flex;
     align-items: center;
+    width: 30%;
   }
   
 .edit-button:hover {
@@ -364,6 +369,7 @@ tbody tr:nth-child(even) {
 }
 .book-card-text {
     margin-left: 10px;
+    width: 80%;
 }
 
 /* books */
@@ -435,6 +441,51 @@ tbody tr:nth-child(even) {
     border: 1px solid #1890ff;
     color: #1890ff;
     cursor: pointer;
+}
+
+.responsive-nav {
+    display: none;
+}
+
+/* responsive */
+@media screen and (max-width: 800px) {
+    .book-card {
+     width: 90%;
+    }
+    .nav-search-responsive {
+     display: none;
+    }
+    .navbar-brand {
+     width: 80%;
+    }
+    .nav-user-profile {
+        display: none;
+    }
+    .responsive-nav {
+        display: block;
+    }
+    .navbar-brand span {
+        margin: 0 5px;
+    }
+}
+
+@media screen and (max-width: 500px)  {
+  .dashboard-card-container {
+    flex-direction: column;
+  }
+  .dashboard-card {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+  .table-responsive {
+    display: none;
+  }
+  .table-show-mobile {
+    display: block;
+  }
+  .books-form {
+    width: 85% ;
+  }
 }
 
 

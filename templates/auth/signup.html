@@ -1,46 +1,45 @@
 {% extends 'auth/index.html' %}
 {% load static %}
+
 <head>
     <title>Sign Up</title>
 </head>
- {% block content %}
-        <div class="center">
-            <div class="form-container books-form">
-                <h3 class="books-form-header">Sign Up</h3>
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li class="alert alert-error">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                <p class="form-text">Already have an account ? <a href="/login">Login</a></p>
-                <form method="POST" action="{% url 'signup' %}">
-                    {% csrf_token %}
-                    <div class="input-containter">
-                        <label class="input-label" for="books-title">Username: </label>
-                        <input value="{{ username }}" class="input" id="books-title" name="username" type="text" />
-                    </div>
-                    <div class="input-containter">
-                        <label class="input-label" for="email">Email: </label>
-                        <input value="{{ email }}" class="input" id="email" name="email" type="email" />
-                    </div>
-                    <div class="input-containter">
-                        <label class="input-label" for="password1">Password: </label>
-                        <input value="{{ password1 }}" class="input" id="password1" name="password1" type="password" />
-                    </div>
-                    <div class="input-containter">
-                        <label class="input-label" for="password2"> Confirm Password: </label>
-                        <input value="{{ password2 }}" class="input" id="password2" name="password2" type="password" />
-                    </div>
-                    <a class="form-text" href="/forgotpassword">Forgot Password </a>
-                    <br> <br>
-                    <button>
-                        Submit
-                    </button>
-                </form>
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Sign Up</h3>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="alert alert-error">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p class="form-text">Already have an account ? <a href="/login">Login</a></p>
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="input-containter">
+                <label class="input-label" for="books-title">Username: </label>
+                <input value="{{ username }}" class="input" id="books-title" name="username" type="text" />
             </div>
-        </div>
+            <div class="input-containter">
+                <label class="input-label" for="email">Email: </label>
+                <input value="{{ email }}" class="input" id="email" name="email" type="email" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="password1">Password: </label>
+                <input value="{{ password1 }}" class="input" id="password1" name="password1" type="password" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="password2"> Confirm Password: </label>
+                <input value="{{ password2 }}" class="input" id="password2" name="password2" type="password" />
+            </div>
+            <a class="form-text" href="/forgotpassword">Forgot Password </a>
+            <br> <br>
+            <button>
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}
- 
-
