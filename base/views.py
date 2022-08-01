@@ -142,3 +142,6 @@ def bookRequests(request, pk):
             form.save()
             return redirect('home')
     return render(request, 'books/book_requests.html', context)
+
+    
+@login_required(login_url='/login')

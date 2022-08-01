@@ -34,6 +34,8 @@ class Borrowed(models.Model):
     description = models.TextField(null=True, blank=True)
     updated = models.DateField(auto_now=True)
     updated = models.DateField(auto_now_add=True)
+    time_borrowed = models.DateTimeField(auto_now=True)
+    time_borrowed = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

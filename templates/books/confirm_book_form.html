@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Confirm Book</h3>
+        <form method="post" action="{% url 'book_requests' book.id %}">
+            {% csrf_token %}
+            <div class="input-containter">
+                <label class="input-label" for="borrowed-time">Set Date Borrowed: </label>
+                <input value="" class="input" id="borrowed-time" name="borrowed_time" type="datetime-local" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="books-time">Set Expected Return Time: </label>
+                <input value="" class="input" id="return-time" name="return_time" type="datetime-local" />
+            </div>
+            <button class="submit-button">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
