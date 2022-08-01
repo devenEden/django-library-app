@@ -27,3 +27,13 @@ class Role(models.Model):
 
 class Book_requests(models.Model):
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+class Borrowed(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
+    updated = models.DateField(auto_now=True)
+    updated = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

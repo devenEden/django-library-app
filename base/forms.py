@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from dataclasses import field
 from django.forms import ModelForm
-from .models import Book, Role
+from .models import Book, Role, Borrowed
 
 
 class SignUpForm(UserCreationForm):
@@ -67,3 +67,9 @@ class RoleForm(ModelForm):
     class Meta:
         model = Role
         fields = '__all__'
+
+class BorrowedForm(ModelForm):
+    class Meta:
+        model = Borrowed
+        fields = '__all__'
+

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
 from .forms import BookForm, RoleForm, SignUpForm, UserCreationForm
-from .models import Book, Role, Book_requests
+from .models import Book, Role, Borrowed
 from django.db.models import Q
 from django.template import loader
 from django.http import HttpResponse
@@ -131,13 +131,13 @@ def loginPage(request):
 
 #Book_requests
 def bookRequests(request, pk):
-    book = Book.objects.get(id=pk)
+    book = Borrowed.objects.get(id=pk)
     context = {
         'book': book
     }
 
     if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
+        form = BorrowedForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
             return redirect('home')
