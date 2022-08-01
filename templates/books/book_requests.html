@@ -42,6 +42,7 @@
     </table>
 </div>
 {% else %}
+<div>
     <table class="books-table-container">
         <thead>
             <tr>
@@ -65,6 +66,31 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+
+<div>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Book Id</th>
+                <th>Time Borrowed</th>
+                <th>Expected Return</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.Id }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 {% endif %}
 
