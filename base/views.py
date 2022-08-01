@@ -129,22 +129,16 @@ def loginPage(request):
 
     return render(request, 'auth/login.html', context)
 
-#Book
-def books(request):
-    my_book = Book.objects.all()
-    template = loader.get_template('base/dashboard.html')
-
-    context= {
-        'my_book' : my_book, 
+#Book_requests
+def bookRequests(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {
+        'book': book
     }
 
-    return HttpResponse(template.render(context, request))
-
-#Book_requests
-def book_requests(request, book_id):
-    try:
-        book = books.objects.get(pk = book_id)
-    except:
-        pass
-
-    return render(request, 'base/book_requests.html', {'book' : book} )
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'books/book_requests.html', context)

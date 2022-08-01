@@ -1,10 +1,43 @@
-{% extends main.html %}
+{% extends 'main.html' %}
 {% load static %}
 {% block content %}
 
 <div class="student-books-container">
-    {book}
+    {% for book in books %}
+    <div class="book-card">
+        <div class="book-card-image-container">
+            <image class="book-card-image" src="{% static 'images/studentBook.png' %}" alt="">
+        </div>
+        <div class="book-card-text">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.description}}</p>
+            <p class="small-student-text">By {{ book.author }}</p>
+            <a class="edit-button" href="">Borrow</a>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
+<div class="">
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
