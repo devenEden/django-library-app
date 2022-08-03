@@ -22,6 +22,20 @@
     </table>
 </div>
 {% else %}
+<div class="dashboard-card-container">
+    <div class="dashboard-card">
+        <h1>{{ borrowed_books }}</h1>
+        <p>Borrowed Book(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>{{ total_students }}</h1>
+        <p>Total Students(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>{{ total_pending}}</h1>
+        <p>Pending Fine(s)</p>
+    </div>
+</div>
 <div>
     <div class = "table-header">
         <h4 class ="table-title">Available Requests</h4>
@@ -57,7 +71,6 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Book Id</th>
                 <th>Date Borrowed</th>
                 <th>Expected Return</th>
             </tr>
@@ -68,10 +81,6 @@
                 <td>{{ borrowed.book }}</td>
                 <td>{{ borrowed.time_borrowed }}</td>
                 <td>{{ borrowed.status }}</td>
-                <td class="table-actions">
-                    <a href="{% url 'confirm_book' book.id %}" class="confirm-button">Confirm</a>
-                    <a href="{% url 'deny_book' book.id %}" class="deny-button">Deny</a>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
