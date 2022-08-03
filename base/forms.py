@@ -73,3 +73,4 @@ class BorrowedForm(ModelForm):
         model = Borrowed
         fields = '__all__'
 
+
