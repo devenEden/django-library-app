@@ -25,17 +25,15 @@ class Role(models.Model):
     def __str__(self):
         return self.role
 
-#class Book_requests(models.Model):
-   # book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
-
+#Book Requests
 class Borrowed(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
-    updated = models.DateField(auto_now=True)
-    updated = models.DateField(auto_now_add=True)
-    time_borrowed = models.DateTimeField(auto_now=True)
-    time_borrowed = models.DateTimeField(auto_now_add=True)
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Returned', 'Returned'),
+    )
+    role = models.ForeignKey(Role, null=True, on_delete = models.SET_NULL)
+    book = models.ForeignKey(Book, null=True, on_delete = models.SET_NULL)
+    time_borrowed = models.DateTimeField(auto_now_add=True, null=True)
+    status = models.CharField(max_length=200, null=True, choices=STATUS)
 
-    def __str__(self):
-        return self.title

@@ -130,12 +130,29 @@ def loginPage(request):
     return render(request, 'auth/login.html', context)
 
 #Book_requests
-def bookRequests(request, pk):
-    book = Borrowed.objects.get(id=pk)
+def borrow_book(request, pk):
+    book = Book.objects.get(id=pk)
     context = {
         'book': book
     }
+    if request.method == 'POST':
+        book.save(Borrowed)
+        return redirect('book_requests')
+    return render(request, 'books/borrow_book.html', context)
 
+def bookRequests(request):
+    borrowed = Borrowed.objects.all()
+    role = Role.objects.all()
+
+    total_students = role.count()
+
+    total_borrowed = borrowed.count()
+    accepted = borrowed.filter("Accepted").count()
+    deny = borrowed.filter("Deny").count()
+    
+    context = {
+        'borrowed': borrowed, 'role': role, 'accepted' : accepted, 'deny' : deny 
+    }
     if request.method == 'POST':
         form = BorrowedForm(request.POST, instance=book)
         if form.is_valid():
@@ -144,4 +161,4 @@ def bookRequests(request, pk):
     return render(request, 'books/book_requests.html', context)
 
     
-@login_required(login_url='/login')
+#@login_required(login_url='/login')

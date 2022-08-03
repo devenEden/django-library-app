@@ -3,30 +3,11 @@
 {% block content %}
 
 {% if user_role.role == 'Student' %}
-<div class="student-books-container">
-    {% for book in books %}
-    <div class="book-card">
-        <div class="book-card-image-container">
-            <image class="book-card-image" src="{% static 'images/studentBook.png' %}" alt="">
-        </div>
-        <div class="book-card-text">
-            <h3>{{ book.title }}</h3>
-            <p>{{ book.description}}</p>
-            <p class="small-student-text">By {{ book.author }}</p>
-            <a class="edit-button" href="">Borrow</a>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-
 <div class="">
-    <a class="button-primary" href="{% url 'create_book' %}">Add A New Book</a>
-    <table class="books-table-container">
         <thead>
             <tr>
                 <th>Title</th>
                 <th>Author</th>
-                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,7 +16,6 @@
             <tr>
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
-                <td>{{ book.description }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -43,6 +23,9 @@
 </div>
 {% else %}
 <div>
+    <div class = "table-header">
+        <h4 class ="table-title">Available Requests</h4>
+    </div>
     <table class="books-table-container">
         <thead>
             <tr>
@@ -75,17 +58,20 @@
             <tr>
                 <th>Title</th>
                 <th>Book Id</th>
-                <th>Time Borrowed</th>
+                <th>Date Borrowed</th>
                 <th>Expected Return</th>
             </tr>
         </thead>
         <tbody>
-            {% for book in books %}
+            {% for borrowed in borroweds %}
             <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.Id }}</td>
-                <td>{{ book.description }}</td>
-                <td>{{ book.description }}</td>
+                <td>{{ borrowed.book }}</td>
+                <td>{{ borrowed.time_borrowed }}</td>
+                <td>{{ borrowed.status }}</td>
+                <td class="table-actions">
+                    <a href="{% url 'confirm_book' book.id %}" class="confirm-button">Confirm</a>
+                    <a href="{% url 'deny_book' book.id %}" class="deny-button">Deny</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
