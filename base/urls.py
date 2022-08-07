@@ -12,6 +12,8 @@ urlpatterns = [
     path('books/borrow-book/<str:pk>/', views.borrow_book, name= 'borrow_book'),
     path('books/create_order/', views.createOrder, name='create_order'),
     path('books/book_requests/', views.bookRequests, name='book_requests'),
+    path('books/confirm_book/<str:pk>/', views.confirmBook, name='confirm_book'),
+    path('books/deny_book/<str:pk>/', views.denyBook, name='deny_book'),
     path('logout/', views.logoutUser, name='logout'),
     
 

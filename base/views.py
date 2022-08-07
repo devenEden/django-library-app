@@ -157,5 +157,28 @@ def createOrder(request):
 def bookRequests(request):
     context = {}
     return render(request, "books/book_requests.html", context)
+
+def confirmBook(request, pk):
+    order = Order.objects.get(id=pk)
+    form = OrderForm(instance = order)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance = order)
+        if form.is_valid():
+            form.save()
+            return redirect('book_requests')
+
+    context = {}
+    return render(request, 'books/confirm_book_form.html', context)
+
+def denyBook(request, pk):
+    order = Order.objects.get(id=pk)
+    context = {
+        'order': order
+    }
+    if request.method == 'POST':
+        order.delete()
+        return redirect('book_requests')
+    return render(request, 'books/deny_book.html', context)
+    
    
 

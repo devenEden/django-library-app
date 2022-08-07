@@ -47,22 +47,21 @@
     <table class="books-table-container">
         <thead>
             <tr>
-                <th>Book Id</th>
-                <th>Students Name</th>
+                <th>Book Name</th>
                 <th>Book Title</th>
-                <th>Book Description</th>
+                <th>Book Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
             <tr>
-                <td>{{ order.role.name }}</td>
+                <td>{{ order.book_name }}</td>
                 <td>{{ order.book.title }}</td>
-                <td>{{ order.book.description }}</td>
+                <td>{{ order.status }}</td>
                 <td class="table-actions">
-                    <a href="{% url 'confirm_book' book.id %}" class="confirm-button">Confirm</a>
-                    <a href="{% url 'deny_book' book.id %}" class="deny-button">Deny</a>
+                    <a href="{% url 'confirm_book' order.id %}" class="confirm-button">Confirm</a>
+                    <a href="{% url 'deny_book' order.id %}" class="deny-button">Deny</a>
                 </td>
             </tr>
             {% endfor %}
