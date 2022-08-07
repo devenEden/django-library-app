@@ -131,6 +131,7 @@ def loginPage(request):
 
 #Book_requests
 @login_required(login_url='/login')
+
 def borrow_book(request, pk):
     book = Book.objects.get(id=pk)
     context = {
@@ -155,7 +156,20 @@ def createOrder(request):
 
 @login_required(login_url='/login')
 def bookRequests(request):
-    context = {}
+    p = request.GET.get('p') if request.GET.get('p') != None else ''
+
+    total_orders = Order.objects.filter(status='Pending').count()
+    total_borrowed = Order.objects. filter(status= 'Accepted').count()
+    orders = Order.objects.filter(Q(book_name_id=p) | Q(date_borrowed=p))
+    user_role = Role.objects.get(user=request.user.id)
+
+    context = {
+        'order': orders,
+        'total_orders': total_orders,
+        'total_borrowed': total_borrowed,
+        'user_role': user_role,
+        'p': p
+    }
     return render(request, "books/book_requests.html", context)
 
 def confirmBook(request, pk):

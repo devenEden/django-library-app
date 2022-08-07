@@ -26,16 +26,16 @@
 
 <div class="dashboard-card-container">
     <div class="dashboard-card">
-        <h1>{{ borrowed_books }}</h1>
+        <h1>{{ total_orders }}</h1>
+        <p>Total order(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>{{ total_borrowed }}</h1>
         <p>Borrowed Book(s)</p>
     </div>
     <div class="dashboard-card">
-        <h1>{{ total_students }}</h1>
-        <p>Total Students(s)</p>
-    </div>
-    <div class="dashboard-card">
-        <h1>{{ total_pending}}</h1>
-        <p>Pending Fine(s)</p>
+        <h1>{{ total_books}}</h1>
+        <p>total_books</p>
     </div>
 </div>
 
@@ -80,10 +80,10 @@
             </tr>
         </thead>
         <tbody>
-            {% for borrowed in borroweds %}
+            {% for order in orders %}
             <tr>
-                <td>{{ order.book }}</td>
-                <td>{{ order.time_borrowed }}</td>
+                <td>{{ order.book_name }}</td>
+                <td>{{ order.date_borrowed }}</td>
                 <td>{{ order.status }}</td>
             </tr>
             {% endfor %}
