@@ -130,6 +130,7 @@ def loginPage(request):
     return render(request, 'auth/login.html', context)
 
 #Book_requests
+@login_required(login_url='/login')
 def borrow_book(request, pk):
     book = Book.objects.get(id=pk)
     context = {
@@ -140,6 +141,7 @@ def borrow_book(request, pk):
         return redirect('book_requests')
     return render(request, 'books/borrow_book.html', context)
 
+@login_required(login_url='/login')
 def createOrder(request):
     form = OrderForm()
     if request.method == 'POST':
@@ -151,5 +153,9 @@ def createOrder(request):
     context = {'form' : form} 
     return render(request, 'books/order_form.html', context)
 
-    
-#@login_required(login_url='/login')
+@login_required(login_url='/login')
+def bookRequests(request):
+    context = {}
+    return render(request, "books/book_requests.html", context)
+   
+
