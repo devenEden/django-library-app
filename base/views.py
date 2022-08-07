@@ -160,7 +160,7 @@ def bookRequests(request):
 
     total_orders = Order.objects.filter(status='Pending').count()
     total_borrowed = Order.objects. filter(status= 'Accepted').count()
-    orders = Order.objects.filter(Q(book_name_id=p) | Q(date_borrowed=p))
+    orders = Order.objects.filter(Q(book_name_id=p) | Q(book_name=p))
     user_role = Role.objects.get(user=request.user.id)
 
     context = {
