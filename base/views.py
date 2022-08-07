@@ -172,9 +172,7 @@ def confirmBook(request, pk):
 
 def denyBook(request, pk):
     order = Order.objects.get(id=pk)
-    context = {
-        'order': order
-    }
+    context = {}
     if request.method == 'POST':
         order.delete()
         return redirect('book_requests')
