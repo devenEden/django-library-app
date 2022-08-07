@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
 from .forms import BookForm, RoleForm, SignUpForm, UserCreationForm
-from .models import Book, Role, Borrowed
+from .models import Book, Role, Order
 from django.db.models import Q
 from django.template import loader
 from django.http import HttpResponse
@@ -136,29 +136,20 @@ def borrow_book(request, pk):
         'book': book
     }
     if request.method == 'POST':
-        book.save(Borrowed)
+        book.save()
         return redirect('book_requests')
     return render(request, 'books/borrow_book.html', context)
 
-def bookRequests(request):
-    borrowed = Borrowed.objects.all()
-    role = Role.objects.all()
-
-    total_students = role.count()
-
-    total_borrowed = borrowed.count()
-    accepted = borrowed.filter("Accepted").count()
-    deny = borrowed.filter("Deny").count()
-    
-    context = {
-        'borrowed': borrowed, 'role': role, 'accepted' : accepted, 'deny' : deny 
-    }
+def createOrder(request):
+    form = OrderForm()
     if request.method == 'POST':
-        form = BorrowedForm(request.POST, instance=book)
+        form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
-    return render(request, 'books/book_requests.html', context)
+
+    context = {'form' : form} 
+    return render(request, 'books/order_form.html', context)
 
     
 #@login_required(login_url='/login')

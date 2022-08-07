@@ -21,7 +21,11 @@
         </tbody>
     </table>
 </div>
+
+
 {% else %}
+
+
 <div class="dashboard-card-container">
     <div class="dashboard-card">
         <h1>{{ borrowed_books }}</h1>
@@ -36,6 +40,8 @@
         <p>Pending Fine(s)</p>
     </div>
 </div>
+
+
 <div>
     <div class = "table-header">
         <h4 class ="table-title">Available Requests</h4>
@@ -43,18 +49,19 @@
     <table class="books-table-container">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Description</th>
+                <th>Book Id</th>
+                <th>Students Name</th>
+                <th>Book Title</th>
+                <th>Book Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for book in books %}
+            {% for order in orders %}
             <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.description }}</td>
+                <td>{{ order.role.name }}</td>
+                <td>{{ order.book.title }}</td>
+                <td>{{ order.book.description }}</td>
                 <td class="table-actions">
                     <a href="{% url 'confirm_book' book.id %}" class="confirm-button">Confirm</a>
                     <a href="{% url 'deny_book' book.id %}" class="deny-button">Deny</a>

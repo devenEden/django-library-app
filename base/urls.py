@@ -10,7 +10,7 @@ urlpatterns = [
     path('books/edit-book/<str:pk>/', views.editBook, name='edit_book'),
     path('books/delete-book/<str:pk>/', views.deleteBook, name='delete_book'),
     path('books/borrow-book/<str:pk>/', views.borrow_book, name= 'borrow_book'),
-    path('books/book-requets/<str:pk/', views.bookRequests, name='book_requets'),
+    path('books/create_order/', views.createOrder, name='create_order'),
     path('logout/', views.logoutUser, name='logout'),
     
 
