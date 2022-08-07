@@ -82,9 +82,9 @@
         <tbody>
             {% for borrowed in borroweds %}
             <tr>
-                <td>{{ borrowed.book }}</td>
-                <td>{{ borrowed.time_borrowed }}</td>
-                <td>{{ borrowed.status }}</td>
+                <td>{{ order.book }}</td>
+                <td>{{ order.time_borrowed }}</td>
+                <td>{{ order.status }}</td>
             </tr>
             {% endfor %}
         </tbody>
