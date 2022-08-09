@@ -325,6 +325,15 @@ tbody tr:nth-child(even) {
     background-color: #fff;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
 }
+.borrow-button-container {
+    display: flex;
+    flex-direction: row;
+}
+.borrow-form-container {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
 .books-form {
     width: 50%;
 }

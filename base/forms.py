@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from dataclasses import field
 from django.forms import ModelForm
-from .models import Book, Role
+from .models import Book, Role, Order
 
 
 class SignUpForm(UserCreationForm):
@@ -67,3 +67,10 @@ class RoleForm(ModelForm):
     class Meta:
         model = Role
         fields = '__all__'
+
+class OrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+

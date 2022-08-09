@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Confirm Book</h3>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="input-containter">
+                <label class="input-label" for="borrowed-time">Book Name: </label>
+                <input disabled value="{{ order.book_name }}" class="input" id="borrowed-time" name="book_name"
+                    type="text" />
+            </div>
+            <input type="hidden" name="book_name" value="{{ order.id }}">
+            <input type="hidden" value="Accepted" name="status">
+            <div class="input-containter">
+                <label class="input-label" for="borrowed-time">Set Date Borrowed: </label>
+                <input value="" class="input" id="borrowed-time" name="date_borrowed" type="datetime-local" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="books-time">Set Expected Return Time: </label>
+                <input value="" class="input" id="return-time" name="return_date" type="datetime-local" />
+            </div>
+            <button class="submit-button">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

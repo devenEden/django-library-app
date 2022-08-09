@@ -18,7 +18,7 @@
             <h3>{{ book.title }}</h3>
             <p>{{ book.description}}</p>
             <p class="small-student-text">By {{ book.author }}</p>
-            <a class="edit-button" href="">Borrow</a>
+            <a class="edit-button" href="{% url 'borrow_book' book.id %}">Borrow</a>
         </div>
     </div>
     {% endfor %}

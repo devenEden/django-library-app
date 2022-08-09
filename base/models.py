@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, date
 
 # Create your models here.
 
@@ -24,3 +25,19 @@ class Role(models.Model):
 
     def __str__(self):
         return self.role
+
+#Book Requests
+class Order(models.Model):
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Returned', 'Returned'),
+    )
+    book_name = models.ForeignKey(Book, null=True, on_delete = models.SET_NULL)
+    date_borrowed = models.DateTimeField(auto_now_add=False, auto_now= False, blank= True)
+    return_date = models.DateTimeField(auto_now_add=False, auto_now= False, blank= True)
+    status = models.CharField(max_length=200, null=True, choices=STATUS)
+
+    def __unicode__(self):
+        return self.book_name
+ 

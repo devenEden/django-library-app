@@ -87,7 +87,63 @@ tbody tr:nth-child(even) {
       background-color: #f71004;
       color: #fff;
   } 
+  
+  .confirm-button {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #1adb14;
+    background-color: #fff;;
+    color: #1adb14;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+.confirm-button:hover {
+      background-color: #1adb14;
+      color: #fff;
+  } 
+.deny-button {
+    display: block;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #f71004;
+    background-color: #fff;;
+    color: #f71004;
+    width: 30%;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .deny-button:hover {
+      background-color: #f71004;
+      color: #fff;
+  } 
 
+  .borrow-button {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #1adb14;
+    background-color: #fff;;
+    color: #1adb14;
+    text-align: center;
+    transition: .3s ease-in;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .borrow-button:hover {
+    background-color: #1adb14;
+    color: #fff;
+  }
 
 /* NAVBAR */
 .navbar {
@@ -379,6 +435,15 @@ tbody tr:nth-child(even) {
     flex-direction: row;
 }
 .delete-form-container {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
+.borrow-button-container {
+    display: flex;
+    flex-direction: row;
+}
+.borrow-form-container {
     padding: 20px;
     background-color: #fff;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
