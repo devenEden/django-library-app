@@ -9,13 +9,13 @@ urlpatterns = [
     path('books/create-book', views.createBook, name='create_book'),
     path('books/edit-book/<str:pk>/', views.editBook, name='edit_book'),
     path('books/delete-book/<str:pk>/', views.deleteBook, name='delete_book'),
-    path('books/borrow-book/<str:pk>/', views.borrow_book, name= 'borrow_book'),
+    path('books/borrow-book/<str:pk>/', views.borrow_book, name='borrow_book'),
     path('books/create_order/', views.createOrder, name='create_order'),
     path('books/book_requests/', views.bookRequests, name='book_requests'),
     path('books/confirm_book/<str:pk>/', views.confirmBook, name='confirm_book'),
     path('books/deny_book/<str:pk>/', views.denyBook, name='deny_book'),
     path('logout/', views.logoutUser, name='logout'),
-    
+
 
     path("reset_password/", auth_views.PasswordResetView.as_view(
         template_name="auth/reset_password.html"), name="reset_password"),
