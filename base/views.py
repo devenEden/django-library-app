@@ -1,9 +1,10 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
-from .forms import BookForm, RoleForm, SignUpForm, UserCreationForm
+from .forms import BookForm, OrderForm, RoleForm, SignUpForm, UserCreationForm
 from .models import Book, Role, Order
 from django.db.models import Q
 from django.template import loader
@@ -129,60 +130,79 @@ def loginPage(request):
 
     return render(request, 'auth/login.html', context)
 
-#Book_requests
-@login_required(login_url='/login')
+# Book_requests
 
+
+@login_required(login_url='/login')
 def borrow_book(request, pk):
     book = Book.objects.get(id=pk)
     context = {
         'book': book
     }
     if request.method == 'POST':
+
         book.save()
         return redirect('book_requests')
     return render(request, 'books/borrow_book.html', context)
 
+
 @login_required(login_url='/login')
 def createOrder(request):
     form = OrderForm()
+    book_name = request.POST.get("book_name")
     if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-
-    context = {'form' : form} 
-    return render(request, 'books/order_form.html', context)
-
-@login_required(login_url='/login')
-def bookRequests(request):
-    p = request.GET.get('p') if request.GET.get('p') != None else ''
-
-    total_orders = Order.objects.filter(status='Pending').count()
-    total_borrowed = Order.objects. filter(status= 'Accepted').count()
-    orders = Order.objects.filter(Q(book_name_id=p) | Q(book_name=p))
-    user_role = Role.objects.get(user=request.user.id)
-
-    context = {
-        'order': orders,
-        'total_orders': total_orders,
-        'total_borrowed': total_borrowed,
-        'user_role': user_role,
-        'p': p
-    }
-    return render(request, "books/book_requests.html", context)
-
-def confirmBook(request, pk):
-    order = Order.objects.get(id=pk)
-    form = OrderForm(instance = order)
-    if request.method == 'POST':
-        form = OrderForm(request.POST, instance = order)
+        form = OrderForm(
+            {
+                "status": "Pending",
+                "date_borrowed": datetime.now(),
+                "book_name": book_name,
+                "return_date": datetime.now()
+            })
         if form.is_valid():
             form.save()
             return redirect('book_requests')
+        else:
+            print(form.errors)
 
-    context = {}
+    return redirect('book_requests')
+
+
+@login_required(login_url='/login')
+def bookRequests(request):
+
+    total_order_count = Order.objects.filter(status='Pending').count()
+    total_orders = Order.objects.filter(status='Pending')
+    total_borrowed = Order.objects.filter(status='Accepted').count()
+    borrowed_books = Order.objects.filter(status="Accepted")
+    user_role = Role.objects.get(user=request.user.id)
+
+    context = {
+        'total_order_count': total_order_count,
+        'total_orders': total_orders,
+        'total_borrowed': total_borrowed,
+        'user_role': user_role,
+        'borrowed_books': borrowed_books
+    }
+
+    return render(request, "books/book_requests.html", context)
+
+
+def confirmBook(request, pk):
+    order = Order.objects.get(id=pk)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('book_requests')
+        else:
+            print(form.errors)
+
+    context = {
+        "order": order
+    }
     return render(request, 'books/confirm_book_form.html', context)
+
 
 def denyBook(request, pk):
     order = Order.objects.get(id=pk)
@@ -191,6 +211,3 @@ def denyBook(request, pk):
         order.delete()
         return redirect('book_requests')
     return render(request, 'books/deny_book.html', context)
-    
-   
-
