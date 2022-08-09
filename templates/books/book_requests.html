@@ -20,7 +20,7 @@
                 <td>{{ book.status }}</td>
                 <td>{{ book.return_date }}</td>
                 <td class="table-actions">
-                    <a href="{% url 'confirm_book' order.id %}" class="edit-button">Confirm</a>
+                    <a href="{% url 'confirm_book' book.id %}" class="edit-button">Confirm</a>
                 </td>
             </tr>
             {% endfor %}
