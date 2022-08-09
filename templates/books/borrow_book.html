@@ -5,11 +5,12 @@
 <div class="center">
     <div class="books-form borrow-form-container">
         <h3>Are you sure you want to borrow {{ book.title }} ? </h3>
-        <form method="POST" action="">
+        <form method="POST" action="{% url 'create_order' %}">
             {% csrf_token %}
+            <input type="hidden" value="{{ book.id }}" name="book_name" />
             <div class="borrow-button-container">
                 <a href="{{ request.META.HTTP_REFERER }}" class="edit-button">Go Back</a>
-                <button class="borrow-button" href="{% url 'create_order' %}">Borrow Book</button>
+                <button class="borrow-button">Borrow Book</button>
             </div>
         </form>
     </div>

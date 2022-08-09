@@ -4,18 +4,24 @@
 
 {% if user_role.role == 'Student' %}
 <div class="">
+    <table>
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Author</th>
-                <th>Actions</th>
+                <th>Status</th>
+                <th>Return Date</th>
+                <td>Actions</td>
             </tr>
         </thead>
         <tbody>
-            {% for book in books %}
+            {% for book in total_orders %}
             <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
+                <td>{{ book.book_name }}</td>
+                <td>{{ book.status }}</td>
+                <td>{{ book.return_date }}</td>
+                <td class="table-actions">
+                    <a href="{% url 'confirm_book' order.id %}" class="edit-button">Confirm</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -26,7 +32,7 @@
 
 <div class="dashboard-card-container">
     <div class="dashboard-card">
-        <h1>{{ total_orders }}</h1>
+        <h1>{{ total_order_count }}</h1>
         <p>Total order(s)</p>
     </div>
     <div class="dashboard-card">
@@ -41,20 +47,20 @@
 
 
 <div>
-    <div class = "table-header">
-        <h4 class ="table-title">Available Requests</h4>
+    <div class="table-header">
+        <h4 class="table-title">Available Requests</h4>
     </div>
     <table class="books-table-container">
         <thead>
             <tr>
-                <th>Book Name</th>
                 <th>Book Title</th>
+                <th>Student</th>
                 <th>Book Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for order in orders %}
+            {% for order in total_orders %}
             <tr>
                 <td>{{ order.book_name }}</td>
                 <td>{{ order.book.title }}</td>
@@ -76,15 +82,17 @@
             <tr>
                 <th>Title</th>
                 <th>Date Borrowed</th>
+                <th>Status</th>
                 <th>Expected Return</th>
             </tr>
         </thead>
         <tbody>
-            {% for order in orders %}
+            {% for order in borrowed_books %}
             <tr>
                 <td>{{ order.book_name }}</td>
                 <td>{{ order.date_borrowed }}</td>
                 <td>{{ order.status }}</td>
+                <td>{{ order.return_date }}</td>
             </tr>
             {% endfor %}
         </tbody>
