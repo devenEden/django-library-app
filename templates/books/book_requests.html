@@ -40,7 +40,7 @@
         <p>Borrowed Book(s)</p>
     </div>
     <div class="dashboard-card">
-        <h1>{{ total_books}}</h1>
+        <h1>{{ total_books }}</h1>
         <p>total_books</p>
     </div>
 </div>
@@ -63,6 +63,7 @@
             {% for order in total_orders %}
             <tr>
                 <td>{{ order.book_name }}</td>
+                <td>{{ order.student_name}}</td>
                 <td>{{ order.book.title }}</td>
                 <td>{{ order.status }}</td>
                 <td class="table-actions">
