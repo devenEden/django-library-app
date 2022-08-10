@@ -150,8 +150,6 @@ def borrow_book(request, pk):
         'book': book
     }
     if request.method == 'POST':
-
-        book.save()
         return redirect('book_requests')
     return render(request, 'books/borrow_book.html', context)
 
@@ -166,7 +164,7 @@ def createOrder(request):
                 "status": "Pending",
                 "date_borrowed": datetime.now(),
                 "book_name": book_name,
-                "return_date": datetime.now()
+                "return_date": datetime.now(),
             })
         if form.is_valid():
             form.save()
