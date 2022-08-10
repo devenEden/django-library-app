@@ -185,13 +185,17 @@ def bookRequests(request):
     total_borrowed = Order.objects.filter(status='Accepted').count()
     borrowed_books = Order.objects.filter(status="Accepted")
     user_role = Role.objects.get(user=request.user.id)
+    total_books = Book.objects.count()
+    student_name = User.objects.get(username=request.user)
 
     context = {
         'total_order_count': total_order_count,
         'total_orders': total_orders,
         'total_borrowed': total_borrowed,
         'user_role': user_role,
-        'borrowed_books': borrowed_books
+        'borrowed_books': borrowed_books,
+        'total_books' : total_books,
+        'student_name' : student_name,
     }
 
     return render(request, "books/book_requests.html", context)
