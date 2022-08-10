@@ -37,7 +37,7 @@ class Order(models.Model):
     date_borrowed = models.DateTimeField(auto_now_add=False, auto_now= False, blank= True)
     return_date = models.DateTimeField(auto_now_add=False, auto_now= False, blank= True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
-    student_name = models.ForeignKey(Role, null=True, on_delete = models.SET_NULL)
+    student_name = models.ForeignKey(User, null=True, on_delete = models.SET_NULL)
 
     def __unicode__(self):
         return self.book_name
