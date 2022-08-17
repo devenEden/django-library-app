@@ -4,12 +4,17 @@
 
 <div class="center">
     <div class="form-container books-form">
-        <h3 class="books-form-header">Confirm Book</h3>
+        <h3 class="books-form-header">Confirm Borrow</h3>
         <form method="post" action="">
             {% csrf_token %}
+            <div class = "input-containter">
+                <label class="input-label" for="student_name">Student Name: </label>
+                <input disabled value="{{ order.student_name }}" class="input" id="student_name" name="student_name"
+                    type="text" />
+            </div>
             <div class="input-containter">
-                <label class="input-label" for="borrowed-time">Book Name: </label>
-                <input disabled value="{{ order.book_name }}" class="input" id="borrowed-time" name="book_name"
+                <label class="input-label" for="book_name">Book Name: </label>
+                <input disabled value="{{ order.id }}" class="input" id="borrowed-time" name="book_name"
                     type="text" />
             </div>
             <input type="hidden" name="book_name" value="{{ order.id }}">
