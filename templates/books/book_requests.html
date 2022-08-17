@@ -27,7 +27,7 @@
                 <tr>
                     <td>Action</td>
                     <td>
-                        <a href="" class="edit-button">Return Book</a>
+                        <a href="{% url 'return_book' order.id %}" class="edit-button">Return Book</a>
                     </td>
                 </tr>
             </tbody>
@@ -55,6 +55,7 @@
 </div>
 {% else %}
 
+<h3>Book Requests</h3>
 
 <div class="dashboard-card-container">
     <div class="dashboard-card">
