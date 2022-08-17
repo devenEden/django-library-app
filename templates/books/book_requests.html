@@ -27,7 +27,10 @@
                 <tr>
                     <td>Action</td>
                     <td>
-                        <a href="{}" class="edit-button">Return Book</a>
+                        <form method="POST" action="">
+                           {% csrf_token %} 
+                            <a class="edit-button" href= "">Return Book</a>
+                        </form>
                     </td>
                 </tr>
             </tbody>
