@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="center">
+    {% if borrowed_book == True %}
     <div class="books-form borrow-form-container">
         <h3>Are you sure you want to borrow {{ book.title }} ? </h3>
         <form method="POST" action="{% url 'create_order' %}">
@@ -14,6 +15,14 @@
             </div>
         </form>
     </div>
+    {% else %}
+    <div class="books-form borrow-form-container">
+        <h3>{{ book }} has already been borrowed</h3>
+        <div class="borrow-button-container">
+            <a href="{{ request.META.HTTP_REFERER }}" class="edit-button">Go Back</a>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
