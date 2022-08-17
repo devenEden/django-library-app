@@ -192,16 +192,19 @@ def createOrder(request):
 def bookRequests(request):
 
     total_order_count = Order.objects.filter(status='Pending').count()
-    total_orders = Order.objects.filter(
-        status='Pending', student_name=request.user)
+    total_orders = Order.objects.filter(status='Pending', student_name=request.user)
     total_orders_admin = Order.objects.filter(status='Pending')
     total_borrowed = Order.objects.filter(status='Accepted').count()
     borrowed_books = Order.objects.filter(status="Accepted")
     user_role = Role.objects.get(user=request.user.id)
     total_books = Book.objects.count()
     student_name = User.objects.get(username=request.user)
-    current_book_borrowed = Order.objects.filter(
-        student_name=request.user).order_by("-id")[:1]
+    current_book_borrowed = Order.objects.filter(student_name=request.user).order_by("-id")[:1]
+    current = {}
+
+    if len(current_book_borrowed) > 0: 
+        current = current_book_borrowed[0]
+    
 
     context = {
         'total_order_count': total_order_count,
@@ -212,7 +215,7 @@ def bookRequests(request):
         'total_books': total_books,
         'student_name': student_name,
         "total_orders_admin": total_orders_admin,
-        "current_book_borrowed": current_book_borrowed[0],
+        "current_book_borrowed": current,
     }
 
     return render(request, "books/book_requests.html", context)
@@ -252,3 +255,20 @@ def denyBook(request, pk):
         order.delete()
         return redirect('book_requests')
     return render(request, 'books/deny_book.html', context)
+
+def returnBook(request, pk):
+    order = Order.objects.get(id=pk)
+    context = {}
+    if request.method == 'POST':
+        form = OrderForm({
+            "status": "Returned",
+            "date_borrowed": request.POST.get("date_borrowed"),
+            "book_name": order.book_name,
+            "return_date": request.POST.get("return_date"),
+            "student_name": order.student_name,
+        }, instance=order) 
+        return redirect('fines')
+    return render(request, 'dashboard.html', context)
+
+def bookFines(request, pk):
+    return render(request, 'book/fines.html')
