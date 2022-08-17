@@ -202,8 +202,13 @@ def bookRequests(request):
 def confirmBook(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
+    inputs = { "return_date":"", "date_borrowed":"" }
+    print("get request")
     if request.method == 'POST':
+        print('ispost n')
         form = OrderForm(request.POST, instance=order)
+        inputs["return_date"] = request.POST.get("return_date")
+        inputs["date_borrowed"] = request.POST.get("date_borrowed")
         if form.is_valid():
             form.save()
             return redirect('book_requests')
@@ -211,7 +216,8 @@ def confirmBook(request, pk):
             print(form.errors)
 
     context = {
-        "order": order
+        "order": order,
+        "form": inputs
     }
     return render(request, 'books/confirm_book_form.html', context)
 
