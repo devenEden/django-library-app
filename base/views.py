@@ -144,11 +144,23 @@ def loginPage(request):
 
 
 @login_required(login_url='/login')
-def borrow_book(request, pk):
+def borrowBook(request, pk):
     book = Book.objects.get(id=pk)
+    borrowed_book = True
+    orders = Order.objects.filter(
+        Q(status="Accepted") | Q(status="Pending"),
+        book_name=book.id
+    ).count()
+
+    if orders >= 1:
+        borrowed_book = False
+
     context = {
-        'book': book
+        'book': book,
+        "borrowed_book": borrowed_book
     }
+
+    print(borrowed_book, orders)
     if request.method == 'POST':
         return redirect('book_requests')
     return render(request, 'books/borrow_book.html', context)
@@ -165,6 +177,7 @@ def createOrder(request):
                 "date_borrowed": datetime.now(),
                 "book_name": book_name,
                 "return_date": datetime.now(),
+                "student_name": request.user
             })
         if form.is_valid():
             form.save()
@@ -179,12 +192,16 @@ def createOrder(request):
 def bookRequests(request):
 
     total_order_count = Order.objects.filter(status='Pending').count()
-    total_orders = Order.objects.filter(status='Pending')
+    total_orders = Order.objects.filter(
+        status='Pending', student_name=request.user)
+    total_orders_admin = Order.objects.filter(status='Pending')
     total_borrowed = Order.objects.filter(status='Accepted').count()
     borrowed_books = Order.objects.filter(status="Accepted")
     user_role = Role.objects.get(user=request.user.id)
     total_books = Book.objects.count()
     student_name = User.objects.get(username=request.user)
+    current_book_borrowed = Order.objects.filter(
+        student_name=request.user).order_by("-id")[:1]
 
     context = {
         'total_order_count': total_order_count,
@@ -192,8 +209,10 @@ def bookRequests(request):
         'total_borrowed': total_borrowed,
         'user_role': user_role,
         'borrowed_books': borrowed_books,
-        'total_books' : total_books,
-        'student_name' : student_name,
+        'total_books': total_books,
+        'student_name': student_name,
+        "total_orders_admin": total_orders_admin,
+        "current_book_borrowed": current_book_borrowed[0],
     }
 
     return render(request, "books/book_requests.html", context)
@@ -201,14 +220,18 @@ def bookRequests(request):
 
 def confirmBook(request, pk):
     order = Order.objects.get(id=pk)
-    form = OrderForm(instance=order)
-    inputs = { "return_date":"", "date_borrowed":"" }
-    print("get request")
+    inputs = {"return_date": "", "date_borrowed": ""}
     if request.method == 'POST':
-        print('ispost n')
-        form = OrderForm(request.POST, instance=order)
+        form = OrderForm({
+            "status": "Accepted",
+            "date_borrowed": request.POST.get("date_borrowed"),
+            "book_name": order.book_name,
+            "return_date": request.POST.get("return_date"),
+            "student_name": order.student_name,
+        }, instance=order)
         inputs["return_date"] = request.POST.get("return_date")
         inputs["date_borrowed"] = request.POST.get("date_borrowed")
+        print(request.POST.get('book_name'))
         if form.is_valid():
             form.save()
             return redirect('book_requests')
