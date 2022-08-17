@@ -5,7 +5,7 @@
 {% if user_role.role == 'Student' %}
 <div class="">
     <div class="book_request_card">
-        <h4>Current Book Borrowed</h4>
+        <h4>Book Fines</h4>
         <table>
             <tbody>
                 <tr>
@@ -21,25 +21,20 @@
                     <td>{{ current_book_borrowed.return_date }}</td>
                 </tr>
                 <tr>
+                    <td>Available Fine</td>
                     <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Action</td>
-                    <td>
-                        <a action = href="{% url 'return_book' order.id %}" class="edit-button">Return Book</a>
-                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <h4>Pending Book Requests</h4>
+    <h4>Book Fines</h4>
     <table>
         <thead>
             <tr>
                 <th>Title</th>
                 <th>Status</th>
                 <th>Return Date</th>
+                <th>Fines<th>
             </tr>
         </thead>
         <tbody>
@@ -75,7 +70,7 @@
 
 <div>
     <div class="table-header">
-        <h4 class="table-title">Pending Fines</h4>
+        <h4 class="table-title">Available Fines</h4>
     </div>
     <table class="books-table-container">
         <thead>
@@ -83,7 +78,6 @@
                 <th>Book Title</th>
                 <th>Student</th>
                 <th>Total Fines</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -92,10 +86,6 @@
                 <td>{{ order.book_name }}</td>
                 <td>{{ order.student_name}}</td>
                 <td>{{ order.status }}</td>
-                <td class="table-actions">
-                    <a href="{% url 'confirm_book' order.id %}" class="confirm-button">Confirm</a>
-                    <a href="{% url 'deny_book' order.id %}" class="deny-button">Deny</a>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
