@@ -1,0 +1,108 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+{% if user_role.role == 'Student' %}
+<div class="">
+    <div class="book_request_card">
+        <h4>Current Book Borrowed</h4>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Book Title</td>
+                    <td>{{ current_book_borrowed.book_name }}</td>
+                </tr>
+                <tr>
+                    <td>Date Borrowed</td>
+                    <td>{{ current_book_borrowed.date_borrowed }}</td>
+                </tr>
+                <tr>
+                    <td>Return Date</td>
+                    <td>{{ current_book_borrowed.return_date }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Action</td>
+                    <td>
+                        <a action = href="{% url 'return_book' order.id %}" class="edit-button">Return Book</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h4>Pending Book Requests</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in total_orders %}
+            <tr>
+                <td>{{ book.book_name }}</td>
+                <td>{{ book.status }}</td>
+                <td>{{ book.return_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+
+<h3>Book Fines</h3>
+
+<div class="dashboard-card-container">
+    <div class="dashboard-card">
+        <h1>{{ total_order_count }}</h1>
+        <p>Total fined students(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>{{ total_borrowed }}</h1>
+        <p>Total fine(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>{{ total_books }}</h1>
+        <p>Borrowed book(s)</p>
+    </div>
+</div>
+
+
+<div>
+    <div class="table-header">
+        <h4 class="table-title">Pending Fines</h4>
+    </div>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Student</th>
+                <th>Total Fines</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in total_orders_admin %}
+            <tr>
+                <td>{{ order.book_name }}</td>
+                <td>{{ order.student_name}}</td>
+                <td>{{ order.status }}</td>
+                <td class="table-actions">
+                    <a href="{% url 'confirm_book' order.id %}" class="confirm-button">Confirm</a>
+                    <a href="{% url 'deny_book' order.id %}" class="deny-button">Deny</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endif %}
+
+{% endblock %} %}
