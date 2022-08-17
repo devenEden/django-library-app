@@ -234,7 +234,6 @@ def confirmBook(request, pk):
         }, instance=order)
         inputs["return_date"] = request.POST.get("return_date")
         inputs["date_borrowed"] = request.POST.get("date_borrowed")
-        print(request.POST.get('book_name'))
         if form.is_valid():
             form.save()
             return redirect('book_requests')
@@ -259,23 +258,10 @@ def denyBook(request, pk):
 def returnBook(request, pk):
     order = Order.objects.get(id=pk)
     if request.method == 'POST':
-        form = OrderForm({
-            "status": "Returned",
-            "date_borrowed": request.POST.get("date_borrowed"),
-            "book_name": order.book_name,
-            "return_date": request.POST.get("return_date"),
-            "student_name": order.student_name,
-        }, instance=order) 
-        if form.is_valid():
-            order.delete()
-            return redirect('book_fines')
-        else:
-            print(form.errors)
+        order.status = "Returned"
+        order.save()
 
-    context = {
-        "order" : order
-    }
-    return render(request, 'dashboard.html', context)
+    return redirect('book_requests')
 
 def bookFines(request):
     return render(request, 'books/book_fines.html')
