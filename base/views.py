@@ -202,6 +202,7 @@ def bookRequests(request):
 def confirmBook(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
+    print('ghsfjfsj')
     if request.method == 'POST':
         form = OrderForm(request.POST, instance=order)
         if form.is_valid():
