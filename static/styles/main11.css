@@ -553,4 +553,10 @@ tbody tr:nth-child(even) {
   }
 }
 
+@media screen and (min-width: 500px){
+    .nav-search-mobile{
+        display: none;
+    }
+}
+
 

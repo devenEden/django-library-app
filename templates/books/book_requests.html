@@ -6,6 +6,9 @@
 <div class="">
     <div class="book_request_card">
         <h4>Current Book Borrowed</h4>
+        {% if current_book_borrowed.status == "Returned" %}
+          <p>You have no borrowed book</p>
+        {% else %}
         <table>
             <tbody>
                 <tr>
@@ -21,17 +24,25 @@
                     <td>{{ current_book_borrowed.return_date }}</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>Status</td>
+                    <td>{{ current_book_borrowed.status }}</td>
                 </tr>
                 <tr>
                     <td>Action</td>
                     <td>
-                        <a href="" class="edit-button">Return Book</a>
+                        {% if current_book_borrowed.status == "Accepted" %}
+                        <form method="POST" action="{% url 'return_book' current_book_borrowed.id %}">
+                           {% csrf_token %} 
+                            <button type="submit" class="edit-button" href= "">Return Book</button>
+                        </form>
+                        {% elif current_book_borrowed.status == "Pending" %}
+                        <a href="{% url 'deny_book' current_book_borrowed.id %}" class="deny-button">Cancel Request</a>
+                        {% endif %}
                     </td>
                 </tr>
             </tbody>
         </table>
+        {% endif %}
     </div>
     <h4>Pending Book Requests</h4>
     <table>
@@ -55,6 +66,7 @@
 </div>
 {% else %}
 
+<h3>Book Requests</h3>
 
 <div class="dashboard-card-container">
     <div class="dashboard-card">
