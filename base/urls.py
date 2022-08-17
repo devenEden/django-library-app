@@ -15,7 +15,7 @@ urlpatterns = [
     path('books/confirm_book/<str:pk>/', views.confirmBook, name='confirm_book'),
     path('books/deny_book/<str:pk>/', views.denyBook, name='deny_book'),
     path('books/return_book/<str:pk>/', views.returnBook, name= 'return_book'),
-    path('books/book_fines/<str:pk>/', views.bookFines, name= 'book_fines'),
+    path('books/book_fines/', views.bookFines, name= 'book_fines'),
     path('logout/', views.logoutUser, name='logout'),
 
 
