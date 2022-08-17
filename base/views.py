@@ -266,8 +266,16 @@ def returnBook(request, pk):
             "return_date": request.POST.get("return_date"),
             "student_name": order.student_name,
         }, instance=order) 
-        return redirect('fines')
-    return render(request, 'dashboard.html')
+        if form.is_valid():
+            order.delete()
+            return redirect('book_fines')
+        else:
+            print(form.errors)
+
+    context = {
+        "order" : order
+    }
+    return render(request, 'dashboard.html', context)
 
 def bookFines(request):
     return render(request, 'books/book_fines.html')
