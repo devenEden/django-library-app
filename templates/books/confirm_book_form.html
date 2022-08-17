@@ -17,17 +17,18 @@
                 <input disabled value="{{ order.id }}" class="input" id="borrowed-time" name="book_name"
                     type="text" />
             </div>
-            <input type="hidden" name="book_name" value="{{ order.id }}">
+            <input type="hidden" name="book_name" value="{{ order.book_name }}" />
+            <input type="hidden" name="student_name" value="{{ order.student_name }}" />
             <input type="hidden" value="Accepted" name="status">
             <div class="input-containter">
                 <label class="input-label" for="borrowed-time">Set Date Borrowed: </label>
-                <input value="" class="input" id="borrowed-time" name="date_borrowed" type="datetime-local" />
+                <input value="{{ form.date_borrowed }}" class="input" id="borrowed-time" name="date_borrowed" type="datetime-local" />
             </div>
             <div class="input-containter">
                 <label class="input-label" for="books-time">Set Expected Return Time: </label>
-                <input value="" class="input" id="return-time" name="return_date" type="datetime-local" />
+                <input value="{{ form.return_date }}" class="input" id="return-time" name="return_date" type="datetime-local" />
             </div>
-            <button class="submit-button">
+            <button type="submit" class="submit-button">
                 Submit
             </button>
         </form>
