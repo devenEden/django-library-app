@@ -258,7 +258,6 @@ def denyBook(request, pk):
 
 def returnBook(request, pk):
     order = Order.objects.get(id=pk)
-    context = {}
     if request.method == 'POST':
         form = OrderForm({
             "status": "Returned",
@@ -268,7 +267,7 @@ def returnBook(request, pk):
             "student_name": order.student_name,
         }, instance=order) 
         return redirect('fines')
-    return render(request, 'dashboard.html', context)
+    return render(request, 'dashboard.html')
 
-def bookFines(request, pk):
-    return render(request, 'book/fines.html')
+def bookFines(request):
+    return render(request, 'books/book_fines.html')
