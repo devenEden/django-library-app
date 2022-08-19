@@ -1,0 +1,138 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+{% if user_role.role == 'Student' %}
+<div class="">
+    <div class="book_request_card">
+        <h4>Most Recent Fine</h4>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Book Title</td>
+                    <td>{{ current_fine.book_name }}</td>
+                </tr>
+                <tr>
+                    <td>Payment Date</td>
+                    <td>{{ current_fine.payment_date }}</td>
+                </tr>
+                <tr>
+                    <td>Return Date</td>
+                    <td>{{ current_fine.return_date }}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{ current_fine.status }}</td>
+                </tr>
+                <tr>
+                    <td>Fine</td>
+                    <td>UGX {{ current_fine.fine }}</td>
+                </tr>
+                <tr>
+                    <td>Action</td>
+                    <td>
+                        {% if current_fine.status == "Paid" %}
+                        <p>Fine Paid</p>
+                        {% else %}
+                        <p>Please go to Librarian to pay and confirm your payment</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h4>Book Fines History</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Payment Date</th>
+                <th>Fine</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fine in fine_history %}
+            <tr>
+                <td>{{ fine.book_name }}</td>
+                <td>{{ fine.status }}</td>
+                <td>{{ fine.payment_date }}</td>
+                <td>UGX {{ fine.fine }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+
+<h3>Book Fines</h3>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="dashboard-card-container">
+    <div class="dashboard-card">
+        <h1>{{ students_with_fines }}</h1>
+        <p>Total fined students(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>UGX {{ total_fines_unpaid }}</h1>
+        <p>Unpaid Fines(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>UGX {{ total_fines_paid }}</h1>
+        <p>Total Fines Paid(s)</p>
+    </div>
+</div>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div>
+    <div class="table-header">
+        <h4 class="table-title">Available Fines</h4>
+    </div>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Student</th>
+                <th>Total Fine</th>
+                <th>Payment Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fine in total_fines %}
+            <tr>
+                <td>{{ fine.book_name }}</td>
+                <td>{{ fine.student_name}}</td>
+                <td>{{ fine.fine }}</td>
+                <td>{{ fine.payment_date }}</td>
+                <td class="">
+                    {% if fine.status == "Not Paid" %}
+                    <form method="POST" action="{% url 'confirm_fine_payment' fine.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="confirm-button" href="">Confirm Payment</button>
+                    </form>
+                    {% else %}
+                    <p>Fine Paid</p>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}
