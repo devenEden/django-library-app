@@ -7,8 +7,15 @@
     <div class="book_request_card">
         <h4>Current Book Borrowed</h4>
         {% if current_book_borrowed.status == "Returned" %}
-          <p>You have no borrowed book</p>
+        <p>You have no borrowed book</p>
         {% else %}
+
+        {% if return_warn_message != "" and current_book_borrowed.status == "Accepted" %}
+        <ul class="messages">
+            <li class="alert">{{ return_warn_message }}</li>
+        </ul>
+        {% endif %}
+
         <table>
             <tbody>
                 <tr>
@@ -30,17 +37,14 @@
                 <tr>
                     <td>Action</td>
                     <td>
-                        {% if current_book_borrowed.status == "Accepted" %}
-                        <form method="POST" action="{% url 'return_book' current_book_borrowed.id %}">
-                           {% csrf_token %} 
-                            <button type="submit" class="edit-button" href= "">Return Book</button>
-                        </form>
-                        {% elif current_book_borrowed.status == "Pending" %}
+                        {% if current_book_borrowed.status == "Pending" %}
                         <a href="{% url 'deny_book' current_book_borrowed.id %}" class="deny-button">Cancel Request</a>
+                        {% else %}
+                        <p>No Actions</p>
                         {% endif %}
                     </td>
                 </tr>
-            </tbody>
+            </tbody>`
         </table>
         {% endif %}
     </div>
@@ -68,10 +72,18 @@
 
 <h3>Book Requests</h3>
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <div class="dashboard-card-container">
     <div class="dashboard-card">
         <h1>{{ total_order_count }}</h1>
-        <p>Total order(s)</p>
+        <p>Book request(s)</p>
     </div>
     <div class="dashboard-card">
         <h1>{{ total_borrowed }}</h1>
@@ -113,33 +125,65 @@
     </table>
 </div>
 
-
 <div>
     <div class="table-header">
-        <h4 class="table-title">Accepted Requests</h4>
+        <h4 class="table-title">Books Borrowed</h4>
     </div>
     <table class="books-table-container">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Date Borrowed</th>
-                <th>Status</th>
-                <th>Expected Return</th>
+                <th>Book Title</th>
+                <th>Student</th>
+                <th>Book Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for order in borrowed_books %}
             <tr>
                 <td>{{ order.book_name }}</td>
-                <td>{{ order.date_borrowed }}</td>
+                <td>{{ order.student_name}}</td>
                 <td>{{ order.status }}</td>
+                <td class="table-actions">
+                    <form method="post" action="{% url 'return_book' order.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="confirm-button">Confirm Return</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <div class="table-header">
+        <h4 class="table-title">All Requests</h4>
+    </div>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Student</th>
+                <th>Status</th>
+                <th>Date Borrowed</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in all_requests %}
+            <tr>
+                <td>{{ order.book_name }}</td>
+                <td>{{ order.student_name }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.date_borrowed }}</td>
                 <td>{{ order.return_date }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-</div>
-{% endif %}
+    {% endif %}
 
-{% endblock %}
+    {% endblock %}

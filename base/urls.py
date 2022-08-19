@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutUser, name='logout'),
     path("signup/", views.signup, name="signup"),
     path('', views.home, name='home'),
     path('books/create-book', views.createBook, name='create_book'),
@@ -14,10 +15,10 @@ urlpatterns = [
     path('books/book_requests/', views.bookRequests, name='book_requests'),
     path('books/confirm_book/<str:pk>/', views.confirmBook, name='confirm_book'),
     path('books/deny_book/<str:pk>/', views.denyBook, name='deny_book'),
-    path('books/return_book/<str:pk>/', views.returnBook, name= 'return_book'),
-    path('books/book_fines/', views.bookFines, name= 'book_fines'),
-    path('logout/', views.logoutUser, name='logout'),
-
+    path('books/return_book/<str:pk>/', views.returnBook, name='return_book'),
+    path('fines/book_fines/', views.bookFines, name='book_fines'),
+    path('fines/confirm_fine_payment/<str:pk>/',
+         views.confirmFinePayment, name="confirm_fine_payment"),
 
     path("reset_password/", auth_views.PasswordResetView.as_view(
         template_name="auth/reset_password.html"), name="reset_password"),

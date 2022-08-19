@@ -3,6 +3,13 @@
 {% block content %}
 
 <h3>Welcome {{ request.user }}</h3>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <form method="GET" action="" class="nav-search nav-search-mobile">
     <input value="{{ q }}" name="q" class="nav-search-input" type="text" placeholder="Search for books">
     <button class="nav-search-button" type="submit">Search</button>
@@ -39,6 +46,7 @@
     </div>
 </div>
 <div class="">
+    <h3>All Books</h3>
     <a class="button-primary" href="{% url 'create_book' %}">Add A New Book</a>
     <table class="books-table-container">
         <thead>

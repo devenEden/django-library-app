@@ -49,6 +49,17 @@ tbody tr:nth-child(even) {
     
 }
 
+.alert {
+    width: 90%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgba(23, 149, 227, 0.1);
+}
+ 
+.alert-error {
+    background-color: rgba(241, 28, 8, 0.1);
+}
+
 .edit-button {
     display: block;
     padding: 10px;
