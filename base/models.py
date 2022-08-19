@@ -26,19 +26,43 @@ class Role(models.Model):
     def __str__(self):
         return self.role
 
-#Book Requests
+# Book Requests
+
+
 class Order(models.Model):
     STATUS = (
         ('Pending', 'Pending'),
         ('Accepted', 'Accepted'),
         ('Returned', 'Returned'),
     )
-    book_name = models.ForeignKey(Book, null=True, on_delete = models.SET_NULL)
-    date_borrowed = models.DateTimeField(auto_now_add=False, auto_now= False, blank= True)
-    return_date = models.DateTimeField(auto_now_add=False, auto_now= False, blank= True)
+    book_name = models.ForeignKey(Book, null=True, on_delete=models.SET_NULL)
+    date_borrowed = models.DateTimeField(
+        auto_now_add=False, auto_now=False, blank=True)
+    return_date = models.DateTimeField(
+        auto_now_add=False, auto_now=False, blank=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
-    student_name = models.ForeignKey(User, null=True, on_delete = models.SET_NULL)
+    student_name = models.ForeignKey(
+        User, null=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.book_name
- 
+
+
+class Fine(models.Model):
+    STATUS = (
+        ('Paid', 'Paid'),
+        ('Not Paid', 'Not Paid'),
+    )
+    fine = models.IntegerField(blank=True, null=True)
+    order = models.ForeignKey(Order, null=True, on_delete=models.SET_NULL)
+    book_name = models.ForeignKey(Book, null=True, on_delete=models.SET_NULL)
+    return_date = models.DateTimeField(
+        auto_now_add=False, auto_now=False, blank=True, null=True)
+    status = models.CharField(max_length=200, null=True, choices=STATUS)
+    payment_date = models.DateTimeField(
+        auto_now_add=False, auto_now=False, blank=True)
+    student_name = models.ForeignKey(
+        User, null=True, on_delete=models.SET_NULL)
+
+    def __unicode__(self):
+        return self.book_name
