@@ -5,7 +5,36 @@
 <div class="center">
     {% if borrowed_book == True %}
     <div class="books-form borrow-form-container">
-        <h3>Are you sure you want to borrow {{ book.title }} ? </h3>
+        {% if has_fine == True %}
+        <h3>You have an unpaid fine</h3>
+        <div class="borrow-button-container">
+            <a href="{% url 'book_fines' %}" class="confirm-button">Go To Fines</a>
+        </div>
+        <div class="borrow-button-container">
+            <a href="{{ request.META.HTTP_REFERER }}" class="edit-button">Go Back</a>
+        </div>
+        {% else %}
+        <h2>Are you sure you want to borrow {{ book.title }} ? </h2>
+        <p>Please note that late return will lead to fines as below</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Period</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3 days past Return date</td>
+                    <td>UGX 5000</td>
+                </tr>
+                <tr>
+                    <td>10 days past Return date</td>
+                    <td>UGX 15000</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
         <form method="POST" action="{% url 'create_order' %}">
             {% csrf_token %}
             <input type="hidden" value="{{ book.id }}" name="book_name" />
@@ -14,6 +43,7 @@
                 <button class="borrow-button">Borrow Book</button>
             </div>
         </form>
+        {% endif %}
     </div>
     {% else %}
     <div class="books-form borrow-form-container">
