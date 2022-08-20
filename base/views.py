@@ -1,5 +1,6 @@
 from datetime import datetime
 from itertools import count
+from telnetlib import STATUS
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -61,13 +62,15 @@ def home(request):
     total_books = Book.objects.count()
     books = Book.objects.filter(Q(title__icontains=q) | Q(author__icontains=q))
     user_role = Role.objects.get(user=request.user.id)
+    total_fines = Fine.objects.filter(status='Not Paid').count()
 
     context = {
         'books': books,
         'total_books': total_books,
         'total_students': total_students,
         'user_role': user_role,
-        'q': q
+        'q': q,
+        "total_fines": total_fines
     }
     return render(request, 'dashboard.html', context)
 
