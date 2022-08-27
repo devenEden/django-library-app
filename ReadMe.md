@@ -4,6 +4,14 @@
 This is web applciation built with the django framework using sqlite database and boostrap for frontend.
 This system is library catalog that allows students borrow and return books that are uploaded by a librarian.
 
+Link to where the app is deployed: https://library-catalog-system.herokuapp.com/login/?next=/
+
+Admin User: root
+Password: password
+Student User: larryEllison
+Password: pass123@
+
+
 #### Base Technologies
 
 | Technology | Version             |
